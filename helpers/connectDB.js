@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
-require('dotenv').config()
+require('dotenv').config();
 const connectDB = () => {
-  mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true ,
-      useUnifiedTopology: true
-    })
+  mongoose
+    .connect(
+      `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_SECRET}@mongodb:27017/solarEnergy?authSource=admin`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    )
     .then(() => console.log('connected to database'))
     .catch((err) => console.log(err));
 };
