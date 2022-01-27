@@ -10,7 +10,7 @@ pipeline{
             
             steps{
                 sh 'npm install'
-                sh 'npm run build'
+                // sh 'npm run build'
             }
         }
         stage("docker-build"){
@@ -25,7 +25,9 @@ pipeline{
             }
         }
         stage("deploy"){
-            echo 'deployment'
+            steps{
+                echo 'deployment'
+            }
         }
     }
 }
