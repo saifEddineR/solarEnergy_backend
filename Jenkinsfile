@@ -1,18 +1,31 @@
 pipeline{
+    environment {
+        imagename = "saifromdhane/nodeserver"
+        registryCredential = 'dockerhub_credentials'
+        // dockerImage = ''
+    }
     agent any
     stages{
-        stage('Build'){
-            steps{
-                echo 'building'
-            }
-        }
-        stage('Test'){
-            steps{
-                echo 'testing'
-            }
-        }
-        stage('Deploy'){
+        stage("build"){
             
+            steps{
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+        stage("docker-build"){
+            steps{
+                script {
+                    dockerImage = docker.build imagename   
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push("$BUILD_NUMBER")
+                    dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+        stage("deploy"){
+            echo 'deployment'
         }
     }
 }
