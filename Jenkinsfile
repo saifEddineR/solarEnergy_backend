@@ -1,7 +1,7 @@
 pipeline{
     environment {
-        imagename = "saifromdhane/nodeserver"
-        registryCredential = 'dockerhub_credentials'
+        imagename = "saifromdhane/solarenergy_back"
+        registryCredential = "dockerhub_credentials"
         // dockerImage = ''
     }
     agent any
