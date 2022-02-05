@@ -3,7 +3,9 @@ pipeline{
         imagename = "saifromdhane/solarenergy_back"
         registryCredential = "dockerhub_credentials"
         // dockerImage = ''
-        scannerHome = tool 'sonarQube scanner'
+        // scannerHome = tool 'sonarQube scanner'
+        def scannerHome = tool 'sonarqube-scanner'
+
     }
     agent any
     stages{
@@ -27,8 +29,7 @@ pipeline{
                     } 
            }
                 // withSonarQubeEnv("sonarQube") {
-                // // This expands the evironment variables SONAR_CONFIG_NAME, SONAR_HOST_URL, SONAR_AUTH_TOKEN that can be used by any script.
-                // // sh "${scannerHome}/bin/sonar-scanner"
+                // sh "${scannerHome}/bin/sonar-scanner"
                 //     sh "${tool("sonarqube")}/bin/sonar-scanner \
                 //     -Dsonar.projectKey=solarenergy-backend \
                 //     -Dsonar.sources=. \
@@ -37,14 +38,7 @@ pipeline{
                 //     -Dsonar.login=admin \
                 //     -Dsonar.password=admin"
                 // }
-                    // withSonarQubeEnv("sonarqube-container") {
-                    // sh "${tool("sonarqube")}/bin/sonar-scanner \
-                    // -Dsonar.projectKey=test-node-js \
-                    // -Dsonar.sources=. \
-                    // -Dsonar.css.node=. \
-                    // -Dsonar.host.url=http://localhost:9000 \
-                    // -Dsonar.login=your-generated-token-from-sonarqube-container"
-                    // }
+                    
             }
         }
         // stage("docker-build"){
