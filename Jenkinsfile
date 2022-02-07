@@ -9,13 +9,6 @@ pipeline{
     }
     agent any
     stages{
-        stage("build"){
-            
-            steps{
-                sh 'npm install'
-                sh 'docker --version'
-            }
-        }
         stage("test-sonar"){
             steps{
                 script {
@@ -27,35 +20,32 @@ pipeline{
                         -Dsonar.login=admin \
                         -Dsonar.password=trythisagain96"
                     } 
-           }
-                // withSonarQubeEnv("sonarQube") {
-                // sh "${scannerHome}/bin/sonar-scanner"
-                //     sh "${tool("sonarqube")}/bin/sonar-scanner \
-                //     -Dsonar.projectKey=solarenergy-backend \
-                //     -Dsonar.sources=. \
-                //     -Dsonar.css.node=. \
-                //     -Dsonar.host.url=https://sonarqube.projectcloud.click/ \
-                //     -Dsonar.login=admin \
-                //     -Dsonar.password=admin"
-                // }
-                    
+                }
             }
         }
-        // stage("docker-build"){
-        //     steps{
-        //         script {
-        //             dockerImage = docker.build imagename   
-        //             docker.withRegistry( '', registryCredential ) {
-        //             dockerImage.push("$BUILD_NUMBER")
-        //             dockerImage.push('latest')
-        //             }
-        //         }
-        //     }
-        // }
-        // stage("deploy"){
-        //     steps{
-        //         echo 'deployment'
-        //     }
-        // }
+        stage("build"){
+            
+            steps{
+                sh 'npm install'
+                sh 'docker --version'
+            }
+        }
+        
+        stage("docker-build"){
+            steps{
+                script {
+                    dockerImage = docker.build imagename   
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push("$BUILD_NUMBER")
+                    dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+        stage("deploy"){
+            steps{
+                echo 'deployment'
+            }
+        }
     }
 }
