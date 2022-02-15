@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 const connectDB = () => {
+  console.log(`${process.env.MONGODB_USERNAME}:${process.env.MONGODB_SECRET}@`);
   mongoose
     .connect(
-      `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_SECRET}@mongodb:27017/solarEnergy?authSource=admin`,
+      `mongodb://mongo-deploy.default.svc.cluster.local:27017/solarEnergy?authSource=admin`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

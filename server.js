@@ -19,4 +19,5 @@ app.use('/api/product', require('./routes/productRoute'));
 app.use('/api/service', require('./routes/serviceRoute'));
 app.use('/api/esteem', require('./routes/esteemRoute'));
 // creating server on port 5000
-app.listen(process.env.PORT || 5000, console.log('connected on port ', process.env.PORT));
+const port = process.env.PORT || 5000;
+app.listen(port, console.log('connected on port ', port));
