@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 app.use(express.json());
-app.use('/img-uploads', express.static(path.join(__dirname, '../', '/img-uploads')));
-app.use('/client-imgs', express.static(path.join(__dirname, '../', '/client-imgs')));
+
 // setting up dotenv
 require('dotenv').config();
 // mongoose setup
@@ -12,6 +11,9 @@ connectDB();
 // cors setup
 const cors = require('cors');
 app.use(cors());
+// get images
+app.use('/img-uploads', express.static(path.join(__dirname, '../', '/img-uploads')));
+app.use('/client-imgs', express.static(path.join(__dirname, '../', '/client-imgs')));
 //routes
 app.use('/api/user', require('./routes/userRoute'));
 app.use('/api/project', require('./routes/projectRoute'));

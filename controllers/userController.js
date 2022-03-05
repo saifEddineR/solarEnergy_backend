@@ -3,6 +3,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
+// creating admin account
+// const hashedPassword = bcrypt.hash('123456', 10);
+// Person.create({
+//   name: 'admin',
+//   username: 'admin',
+//   email: 'admin@solar.com',
+//   password: hashedPassword,
+// });
+
 // @desc register new user & return token
 // @route POST /api/user/register
 // @access public
