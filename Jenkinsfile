@@ -3,7 +3,6 @@ pipeline{
         imagename = "saifromdhane/solarenergy_back"
         registryCredential = "dockerhub_credentials"
         // dockerImage = ''
-        // scannerHome = tool 'sonarQube scanner'
         def scannerHome = tool 'sonarqube-scanner'
 
     }
@@ -43,8 +42,12 @@ pipeline{
             }
         }
         stage("deploy"){
-            steps{
-                echo 'deployment'
+            steps {
+                withCredentials([
+                string(credentialsId: 'k8s', variable: 'api_token')
+                ]) {
+                sh 'kubectl --token $api_token --server https://192.168.58.2:8443 --insecure-skip-tls-verify=true apply -f ./Kubernetes '
+                }
             }
         }
     }
