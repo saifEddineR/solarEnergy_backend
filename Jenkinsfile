@@ -15,9 +15,9 @@ pipeline{
                     sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=solarenergy-backend \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://localhost:9000 \
+                        -Dsonar.host.url=https://sonarqube.projectcloud.click/ \
                         -Dsonar.login=admin \
-                        -Dsonar.password=trythisagain96"
+                        -Dsonar.password=admin"
                     } 
                 }
             }
