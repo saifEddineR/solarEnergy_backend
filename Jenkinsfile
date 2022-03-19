@@ -3,7 +3,7 @@ pipeline{
         imagename = "saifromdhane/solarenergy_back"
         registryCredential = "dockerhub_credentials"
         // dockerImage = ''
-        scannerHome = tool 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+        scannerHome = tool 'sonarqube-scanner'
 
     }
     agent any
