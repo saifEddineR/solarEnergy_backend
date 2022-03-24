@@ -8,20 +8,28 @@ pipeline{
     }
     agent any
     stages{
-        stage("test-sonar"){
-            steps{
-                script {
-                    def scannerHome = tool 'sonarqube-scanner'
-                }
-                    withSonarQubeEnv("sonarQube") {
-                    sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=solarenergy-backend \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=https://sonarqube.projectcloud.click/ \
-                        -Dsonar.login=admin \
-                        -Dsonar.password=admin"
-                    } 
-                }
+        stage("SonarQube analysis"){
+             tools {
+        sonarQube 'sonarqube-scanner'
+      }
+      steps {
+        withSonarQubeEnv('sonarQube') {
+          sh 'sonar-scanner'
+        }
+      }
+            //steps{
+                //script {
+                  //  def scannerHome = tool 'sonarqube-scanner'
+               // }
+                   // withSonarQubeEnv("sonarQube") {
+                   // sh "${scannerHome}/bin/sonar-scanner \
+                       // -Dsonar.projectKey=solarenergy-backend \
+                        //-Dsonar.sources=. \
+                        //-Dsonar.host.url=https://sonarqube.projectcloud.click/ \
+                        //-Dsonar.login=admin \
+                        //-Dsonar.password=admin"
+                    //} 
+                //}
         }
         stage("build"){
             
