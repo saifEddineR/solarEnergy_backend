@@ -12,7 +12,7 @@ pipeline{
             steps{
                 script {
                     def scannerHome = tool 'sonarqube-scanner'
-                    
+                }
                     withSonarQubeEnv("sonarQube") {
                     sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=solarenergy-backend \
@@ -22,7 +22,6 @@ pipeline{
                         -Dsonar.password=admin"
                     } 
                 }
-            }
         }
         stage("build"){
             
