@@ -7,7 +7,7 @@ pipeline{
     }
     agent any
     tools {
-        nodejs "nodejs"
+        nodejs "node-js"
     }
     stages{
         stage("test-sonar"){
