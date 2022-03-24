@@ -3,7 +3,7 @@ pipeline{
         imagename = "saifromdhane/solarenergy_back"
         registryCredential = "dockerhub_credentials"
         // dockerImage = ''
-        scannerHome = tool 'sonarqube-scanner'
+        
 
     }
     agent any
@@ -11,6 +11,8 @@ pipeline{
         stage("test-sonar"){
             steps{
                 script {
+                    scannerHome = tool 'sonarqube-scanner'
+                    
                     withSonarQubeEnv("sonarQube") {
                     sh "${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=solarenergy-backend \
