@@ -4,9 +4,11 @@ pipeline{
         registryCredential = "dockerhub_credentials"
         scannerHome = tool name: 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         // scannerHome = tool 'sonarqube-scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-
     }
     agent any
+    tools {
+        nodejs "nodejs"
+    }
     stages{
         stage("test-sonar"){
             steps{
