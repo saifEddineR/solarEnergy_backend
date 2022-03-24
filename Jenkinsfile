@@ -22,11 +22,10 @@ pipeline{
                 }
             }
         }
-        stage("build"){
+        stage("install dependencies"){
             
             steps{
                 sh 'npm install'
-                sh 'docker --version'
             }
         }
         
@@ -41,7 +40,7 @@ pipeline{
                 }
             }
         }
-        stage("deploy"){
+        stage("deployment"){
             steps {
                 withCredentials([
                 string(credentialsId: 'k8s', variable: 'api_token')
