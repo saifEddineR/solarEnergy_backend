@@ -8,15 +8,19 @@ pipeline{
     }
     agent any
     stages{
-        stage("SonarQube analysis"){
-             tools {
-        sonarQube 'sonarqube-scanner'
-      }
-      steps {
-        withSonarQubeEnv('sonarQube') {
-          sh 'sonar-scanner'
-        }
-      }
+        steps {
+       script {
+       def scannerHome = tool 'sonarqube-scanner';
+           withSonarQubeEnv("sonarQube") {
+           sh "${tool("sonarqube")}/bin/sonar-scanner \
+           -Dsonar.projectKey=solarenergy-backend \
+           -Dsonar.sources=. \
+           -Dsonar.host.url=https://sonarqube.projectcloud.click/ \
+           -Dsonar.login=admin \
+           -Dsonar.password=admin"
+               }
+           }
+       }
             //steps{
                 //script {
                   //  def scannerHome = tool 'sonarqube-scanner'
